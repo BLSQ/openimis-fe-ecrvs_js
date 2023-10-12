@@ -1,6 +1,5 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
-import { formatMessage } from '@openimis/fe-core';
 import { Grid } from '@material-ui/core';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { defaultFilterStyles } from '../utils/styles';
@@ -22,7 +21,7 @@ function HeraNotificationsFilter({
         <HeraNotificationsStatusPicker
           label="heraNotifications.statusPicker"
           withNull
-          nullLabel={formatMessage(intl, 'ecrvs', 'any')}
+          module={"ecrvs"}
           value={filterValue('status')}
           onChange={(value) => onChangeFilters([
             {
@@ -37,7 +36,7 @@ function HeraNotificationsFilter({
         <HeraNotificationsTopicPicker
           label="heraNotifications.topicPicker"
           withNull
-          nullLabel={formatMessage(intl, 'ecrvs', 'any')}
+          module={"ecrvs"}
           value={filterValue('topic')}
           onChange={(value) => onChangeFilters([
             {
@@ -52,7 +51,7 @@ function HeraNotificationsFilter({
         <HeraNotificationsOperationPicker
           label="heraNotifications.operationPicker"
           withNull
-          nullLabel={formatMessage(intl, 'ecrvs', 'any')}
+          module={"ecrvs"}
           value={filterValue('operation')}
           onChange={(value) => onChangeFilters([
             {

@@ -17,7 +17,7 @@ function HeraNotificationsPage(props) {
   return (
       rights.includes(RIGHT_HERA_NOTIFICATIONS_SEARCH) && (
       <div className={classes.page}>
-        <Helmet title={formatMessage(intl, 'socialProtection', 'benefitPlan.benefitPlanHelmet')} />
+        <Helmet title={formatMessage(intl, 'ecrvs', 'heraNotifications.heraNotificationsHelmet')} />
         <HeraNotificationsSearcher rights={rights} />
       </div>
       )
