@@ -39,7 +39,6 @@ function HeraSubscriptionsSearcher({
   heraSubscriptionsPageInfo,
   heraSubscriptionsTotalCount,
   deleteHeraSubscription,
-  onFiltersChange,
 }) {
 
   const [heraSubscriptionToDelete, setHeraSubscriptionToDelete] = useState(null);
@@ -129,7 +128,6 @@ function HeraSubscriptionsSearcher({
   ];
 
   const heraSubscriptionsFilter = (props) => {
-   onFiltersChange(props.filters);
     return (
        <HeraSubscriptionsFilter
         intl={props.intl}

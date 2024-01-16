@@ -23,22 +23,6 @@ const styles = (theme) => ({
 
 function HeraSubscriptionsPage(props) {
   const { intl, classes, rights } = props;
-  const [refreshState, setRefreshState] = useState("");
-  const [filtersState, setFilters] = useState("");
-
-
-  // console.log("--- searcher ref = ", searcherRef.current);
-  const refresh = (success) => {
-    // console.log("/// refresh - success = ", success);
-    // if (success) {
-        // console.log("/// refresh - filtersState = ", filtersState);
-        // fetchHeraSubscriptions(filtersState)
-
-        // window.searcher.applyFilters();
-    // }
-  }
-
-  console.log("--- Hera Subs Page render ---");
 
   return (
       rights.includes(RIGHT_HERA_SUBSCRIPTIONS_SEARCH) && (
@@ -46,12 +30,9 @@ function HeraSubscriptionsPage(props) {
         <Helmet title={formatMessage(intl, 'ecrvs', 'heraSubscriptions.heraSubscriptionsHelmet')} />
         <HeraSubscriptionsSearcher
             rights={rights}
-            onFiltersChange={setFilters}
         />
         {rights.includes(RIGHT_HERA_SUBSCRIPTIONS_CREATE) && (
-          <HeraSubscriptionsCreator
-            onNewSubscription={refresh}
-          />
+          <HeraSubscriptionsCreator />
         )}
       </div>
       )
