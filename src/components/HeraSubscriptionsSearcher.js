@@ -182,6 +182,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   dispatch,
 );
 
-export default withHistory(
-  withModulesManager(injectIntl(connect(mapStateToProps, mapDispatchToProps)(HeraSubscriptionsSearcher))),
+export default injectIntl(withHistory(
+  withModulesManager(connect(mapStateToProps, mapDispatchToProps)(HeraSubscriptionsSearcher))),
 );

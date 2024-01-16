@@ -237,4 +237,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   journalize,
 }, dispatch);
 
-export default withHistory(withModulesManager(injectIntl(withTheme(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(HeraSubscriptionsCreator))))));
+export default injectIntl(withHistory(withModulesManager(withTheme(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(HeraSubscriptionsCreator))))));

@@ -51,4 +51,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   dispatch,
 );
 
-export default withModulesManager(injectIntl(withTheme(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(HeraSubscriptionsPage)))));
+export default injectIntl(withModulesManager(withTheme(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(HeraSubscriptionsPage)))));

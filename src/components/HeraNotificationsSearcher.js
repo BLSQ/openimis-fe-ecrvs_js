@@ -110,6 +110,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   dispatch,
 );
 
-export default withHistory(
-  withModulesManager(injectIntl(connect(mapStateToProps, mapDispatchToProps)(HeraNotificationsSearcher))),
+export default injectIntl(withHistory(
+  withModulesManager(connect(mapStateToProps, mapDispatchToProps)(HeraNotificationsSearcher))),
 );
