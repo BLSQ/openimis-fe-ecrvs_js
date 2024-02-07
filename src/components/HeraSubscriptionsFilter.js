@@ -3,11 +3,10 @@ import { injectIntl } from 'react-intl';
 import { Grid } from '@material-ui/core';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { defaultFilterStyles } from '../utils/styles';
-import HeraNotificationsStatusPicker from "../pickers/HeraNotificationsStatusPicker";
 import HeraNotificationsTopicPicker from "../pickers/HeraNotificationsTopicPicker";
-import HeraNotificationsOperationPicker from "../pickers/HeraNotificationsOperationPicker";
+import HeraSubscriptionsStatusPicker from "../pickers/HeraSubscriptionsStatusPicker";
 
-function HeraNotificationsFilter({
+function HeraSubscriptionsFilter({
   intl,
   classes,
   filters,
@@ -17,21 +16,6 @@ function HeraNotificationsFilter({
 
   return (
     <Grid container className={classes.form}>
-      <Grid item xs={2} className={classes.item}>
-        <HeraNotificationsStatusPicker
-          label="heraNotifications.statusPicker"
-          withNull
-          module={"ecrvs"}
-          value={filterValue('status')}
-          onChange={(value) => onChangeFilters([
-            {
-              id: 'status',
-              value,
-              filter: `status: "${value}"`,
-            },
-          ])}
-        />
-      </Grid>
       <Grid item xs={2} className={classes.item}>
         <HeraNotificationsTopicPicker
           label="heraNotifications.topicPicker"
@@ -48,16 +32,16 @@ function HeraNotificationsFilter({
         />
       </Grid>
       <Grid item xs={2} className={classes.item}>
-        <HeraNotificationsOperationPicker
-          label="heraNotifications.operationPicker"
+        <HeraSubscriptionsStatusPicker
+          label="heraSubscriptions.statusPicker"
           withNull
           module={"ecrvs"}
-          value={filterValue('operation')}
+          value={filterValue('active')}
           onChange={(value) => onChangeFilters([
             {
-              id: 'operation',
+              id: 'active',
               value,
-              filter: `operation: "${value}"`,
+              filter: `active: ${value}`,
             },
           ])}
         />
@@ -66,4 +50,4 @@ function HeraNotificationsFilter({
   );
 }
 
-export default injectIntl(withTheme(withStyles(defaultFilterStyles)(HeraNotificationsFilter)));
+export default injectIntl(withTheme(withStyles(defaultFilterStyles)(HeraSubscriptionsFilter)));

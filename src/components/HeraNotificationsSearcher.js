@@ -10,14 +10,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
   DEFAULT_PAGE_SIZE,
-  RIGHT_HERA_NOTIFICATIONS_SEARCH,
   ROWS_PER_PAGE_OPTIONS,
 } from '../constants';
 import { fetchHeraNotifications } from '../actions';
 import HeraNotificationsFilter from "./HeraNotificationsFilter";
+import {formatDateTimeFromISO} from "../utils/date";
 
 function HeraNotificationsSearcher({
   intl,
+  modulesManager,
   fetchHeraNotifications,
   fetchingHeraNotifications,
   errorHeraNotifications,
@@ -41,11 +42,11 @@ function HeraNotificationsSearcher({
 
   const itemFormatters = () => {
     const formatters = [
-      (heraNotification) => heraNotification.datetimeReceived,
+      (heraNotification) => formatDateTimeFromISO(modulesManager, heraNotification.datetimeReceived),
       (heraNotification) => heraNotification.status,
       (heraNotification) => heraNotification.topic,
       (heraNotification) => heraNotification.operation,
-      (heraNotification) => heraNotification.datetimeProcessed,
+      (heraNotification) => formatDateTimeFromISO(modulesManager, heraNotification.datetimeProcessed),
       (heraNotification) => heraNotification.jsonExt,
     ];
     return formatters;
@@ -109,6 +110,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   dispatch,
 );
 
-export default withHistory(
-  withModulesManager(injectIntl(connect(mapStateToProps, mapDispatchToProps)(HeraNotificationsSearcher))),
+export default injectIntl(withHistory(
+  withModulesManager(connect(mapStateToProps, mapDispatchToProps)(HeraNotificationsSearcher))),
 );
