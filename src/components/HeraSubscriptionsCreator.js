@@ -27,7 +27,6 @@ import {
 } from "../constants";
 import HeraNotificationsTopicPicker from "../pickers/HeraNotificationsTopicPicker";
 import { createHeraSubscription } from "../actions";
-import { ACTION_TYPE } from '../reducer';
 
 const styles = (theme) => ({
   page: theme.page,
@@ -35,23 +34,20 @@ const styles = (theme) => ({
 });
 
 function HeraSubscriptionsCreator(props) {
-  const { intl, classes, rights, onNewSubscription, submittingMutation, mutation, journalize, createHeraSubscription } = props;
+  const { intl, classes, rights, submittingMutation, mutation, journalize, createHeraSubscription } = props;
   const [dialogState, setDialogState] = useState({});
   const prevSubmittingMutationRef = useRef();
 
 
-  // useEffect(() => {
-  //   if (prevSubmittingMutationRef.current && !submittingMutation) {
-  //     journalize(mutation);
-  //     if (mutation?.actionType === ACTION_TYPE.CREATE_HERA_SUBSCRIPTION) {
-  //       console.log("*** create hera sub mutation after journalize ***");
-  //     }
-  //   }
-  // }, [submittingMutation]);
-  //
-  // useEffect(() => {
-  //   prevSubmittingMutationRef.current = submittingMutation;
-  // });
+  useEffect(() => {
+    if (prevSubmittingMutationRef.current && !submittingMutation) {
+      journalize(mutation);
+    }
+  }, [submittingMutation]);
+
+  useEffect(() => {
+    prevSubmittingMutationRef.current = submittingMutation;
+  });
 
   const onAdd = (e) => {
     setDialogState({
@@ -66,15 +62,12 @@ function HeraSubscriptionsCreator(props) {
       selected: false,
       topic: "",
     });
-    console.log("*** state = ", dialogState);
   };
 
   const onDialogClose = (reason) => {
-    console.log("*** on close ***");
     if (reason === "escapeKeyDown" || reason === "backdropClick") {
       return;
     }
-    onNewSubscription(dialogState.success)
     setDialogState({
       ...dialogState,
       open: false,
@@ -86,11 +79,9 @@ function HeraSubscriptionsCreator(props) {
       topic: "",
       mutationErrors: null,
     });
-    console.log("*** refreshed parent ***");
   };
 
   const  onSubmit = async (e) => {
-    console.log("*** on submit ***");
     setDialogState({
       ...dialogState,
       isUserSelecting: false,
@@ -100,7 +91,6 @@ function HeraSubscriptionsCreator(props) {
       dialogState.topic,
       formatMessageWithValues(intl, 'ecrvs', 'heraSubscriptions.create.mutationLabel', {"topic": dialogState.topic}),
     );
-    console.log("*** state = ", dialogState);
     const status = result.status;
     if (status !== 2) {
       setDialogState({
@@ -121,7 +111,6 @@ function HeraSubscriptionsCreator(props) {
         success: true,
       })
     }
-    console.log("*** state = ", dialogState);
   }
 
   const getDialogTitle = () => {
